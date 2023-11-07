@@ -1,3 +1,25 @@
+const labelTime = document.getElementById("time");
+let attuale = sessionStorage.getItem("time");
+console.log(typeof attuale);
+const stampaNumeri = () => {
+  if (attuale === "NaN") {
+    attuale = 0;
+    setInterval(function () {
+      labelTime.textContent = attuale;
+      let time = attuale++;
+      sessionStorage.setItem("time", time);
+    }, 1000);
+  } else {
+    setInterval(function () {
+      labelTime.textContent = attuale;
+      let time = attuale++;
+      sessionStorage.setItem("time", time);
+    }, 1000);
+  }
+};
+
+// utilizzo:
+
 window.addEventListener("DOMContentLoaded", () => {
   const inputText = document.getElementById("inputTextName");
   const saveInLocalStorageButton = document.getElementById("saveInLocalStorage");
@@ -14,7 +36,6 @@ window.addEventListener("DOMContentLoaded", () => {
   removeInLocalStorageButton.onclick = () => {
     const nameInStorage = localStorage.removeItem("name");
     labelResponce.textContent = "";
-    inputText.value = "";
   };
 
   const loadTextFromStorage = () => {
@@ -23,5 +44,8 @@ window.addEventListener("DOMContentLoaded", () => {
       labelResponce.textContent = loadFromStorage;
     }
   };
+
   loadTextFromStorage();
 });
+
+stampaNumeri();
